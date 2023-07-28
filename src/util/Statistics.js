@@ -26,23 +26,25 @@ export default class Statistics {
     return Number(result).toFixed(3);
   }
 
-  mode(array) {
-    var numMapping = {};
-    for (var i = 0; i < this.array.length; i++) {
-      if (numMapping[this.array[i]] === undefined) {
-        numMapping[this.array[i]] = 0;
-      }
-      numMapping[this.array[i]] += 1;
-    }
+  mode() {
+    let mode = [this.array[0]];
+    let mxFq = 1;
+    let curFq = 1;
 
-    var greatestFreq = 0;
-    var mode;
-    for (var prop in numMapping) {
-      if (numMapping[prop] > greatestFreq) {
-        greatestFreq = numMapping[prop];
-        mode = prop;
-      }
+    for(let i=1 ; i < this.array.length ; i++) {
+        if(this.array[i-1] === this.array[i]) {
+            curFq++;
+        } else {
+            curFq = 1;
+        }
+
+        if (curFq === mxFq) {
+            mode.push(this.array[i]);
+        } else if (curFq > mxFq) {
+            mxFq = curFq;
+            mode = [this.array[i]];
+        }
     }
-    return Number(mode).toFixed(3);
-  }
+    return mode.length === this.array.length ? [-1] : mode.join(', ');
+}
 }

@@ -22,8 +22,8 @@ const WineStatistics = () => {
             data: CalculateStats(OptimizedCatalog, (array) => {
               return array.map((ele) => {
                 return (
-                  (parseFloat(ele["Ash"]) * parseFloat(ele["Hue"])) /
-                  parseFloat(ele["Magnesium"])
+                  +((parseFloat(ele["Ash"]) * parseFloat(ele["Hue"])) /
+                  parseFloat(ele["Magnesium"])).toFixed(3)
                 );
               });
             })
